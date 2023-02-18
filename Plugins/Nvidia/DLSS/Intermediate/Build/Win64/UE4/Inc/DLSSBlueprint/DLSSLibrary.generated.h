@@ -16,8 +16,8 @@ enum class UDLSSSupport : uint8;
 #endif
 #define DLSSBLUEPRINT_DLSSLibrary_generated_h
 
-#define Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_SPARSE_DATA
-#define Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS \
+#define ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_SPARSE_DATA
+#define ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execEnableDLAA); \
 	DECLARE_FUNCTION(execGetDefaultDLSSMode); \
@@ -35,7 +35,7 @@ enum class UDLSSSupport : uint8;
 	DECLARE_FUNCTION(execSetDLSSSharpness);
 
 
-#define Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS_NO_PURE_DECLS \
+#define ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execEnableDLAA); \
 	DECLARE_FUNCTION(execGetDefaultDLSSMode); \
@@ -53,7 +53,7 @@ enum class UDLSSSupport : uint8;
 	DECLARE_FUNCTION(execSetDLSSSharpness);
 
 
-#define Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS_NO_PURE_DECLS \
+#define ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUDLSSLibrary(); \
 	friend struct Z_Construct_UClass_UDLSSLibrary_Statics; \
@@ -62,7 +62,7 @@ public: \
 	DECLARE_SERIALIZER(UDLSSLibrary)
 
 
-#define Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS \
+#define ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS \
 private: \
 	static void StaticRegisterNativesUDLSSLibrary(); \
 	friend struct Z_Construct_UClass_UDLSSLibrary_Statics; \
@@ -71,7 +71,7 @@ public: \
 	DECLARE_SERIALIZER(UDLSSLibrary)
 
 
-#define Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_STANDARD_CONSTRUCTORS \
+#define ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	DLSSBLUEPRINT_API UDLSSLibrary(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UDLSSLibrary) \
@@ -84,7 +84,7 @@ private: \
 public:
 
 
-#define Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_ENHANCED_CONSTRUCTORS \
+#define ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	DLSSBLUEPRINT_API UDLSSLibrary(UDLSSLibrary&&); \
@@ -95,28 +95,28 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(UDLSSLibrary)
 
 
-#define Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_PRIVATE_PROPERTY_OFFSET
-#define Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_9_PROLOG
-#define Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_GENERATED_BODY_LEGACY \
+#define ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_PRIVATE_PROPERTY_OFFSET
+#define ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_9_PROLOG
+#define ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_PRIVATE_PROPERTY_OFFSET \
-	Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_SPARSE_DATA \
-	Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS \
-	Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS \
-	Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_STANDARD_CONSTRUCTORS \
+	ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_PRIVATE_PROPERTY_OFFSET \
+	ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_SPARSE_DATA \
+	ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS \
+	ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS \
+	ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_GENERATED_BODY \
+#define ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_PRIVATE_PROPERTY_OFFSET \
-	Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_SPARSE_DATA \
-	Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS_NO_PURE_DECLS \
-	Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS_NO_PURE_DECLS \
-	Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_ENHANCED_CONSTRUCTORS \
+	ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_PRIVATE_PROPERTY_OFFSET \
+	ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_SPARSE_DATA \
+	ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS_NO_PURE_DECLS \
+	ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS_NO_PURE_DECLS \
+	ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -124,7 +124,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> DLSSBLUEPRINT_API UClass* StaticClass<class UDLSSLibrary>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID Shadows__Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h
+#define CURRENT_FILE_ID ShadowsMod_DRG_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
