@@ -1,8 +1,7 @@
 #include "DJSONObject.h"
 
-class UDJSONArray;
-class UDJSONObject;
-class UObject;
+UDJSONObject::UDJSONObject() {
+}
 
 UDJSONObject* UDJSONObject::CreateJSONObject(UObject* WorldContextObject) {
     return NULL;
@@ -68,6 +67,4 @@ bool UDJSONObject::AddBooleanArrayField(const FString& Key, const TArray<bool>& 
     return false;
 }
 
-UDJSONObject::UDJSONObject() {
-}
 

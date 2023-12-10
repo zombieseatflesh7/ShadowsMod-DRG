@@ -7,6 +7,7 @@
 
 class AActor;
 class UItemID;
+class UObject;
 class UResourceData;
 class UTexture2D;
 
@@ -51,8 +52,9 @@ public:
     int32 RequiredCharacterLevel;
     
     UItemData();
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    UTexture2D* GetPreviewImage() const;
+
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
+    UTexture2D* GetPreviewImage(UObject* WorldContext) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TSubclassOf<AActor> GetPreviewActorClass() const;

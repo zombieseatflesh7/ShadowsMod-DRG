@@ -49,6 +49,9 @@ protected:
     bool RequiredReturnObjectiveCompleted;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool ShowObjectiveInHUD;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionStat* ObjectiveCompletedStat;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -67,9 +70,10 @@ protected:
     TArray<UBiome*> BannedInBiomes;
     
 public:
-    UObjective();
+    UObjective(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void SignalObjectiveUpdated();

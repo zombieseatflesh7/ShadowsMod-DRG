@@ -61,8 +61,12 @@ protected:
     UDialogDataAsset* BeerMugShout;
     
 public:
-    ADisplayCase();
+    ADisplayCase(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+    UFUNCTION(BlueprintCallable)
+    void RefreshContent();
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -70,6 +74,9 @@ protected:
     
     UFUNCTION(BlueprintCallable)
     void OnRep_ContentIndex();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsSpecialContent() const;
     
 public:
     UFUNCTION(BlueprintCallable)

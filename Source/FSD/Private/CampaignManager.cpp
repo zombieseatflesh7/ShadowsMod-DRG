@@ -1,12 +1,13 @@
 #include "CampaignManager.h"
 #include "Templates/SubclassOf.h"
 
-class AFSDPlayerController;
-class UCampaign;
-class UDifficultySetting;
-class UFSDSaveGame;
-class UGeneratedMission;
-class UObject;
+UCampaignManager::UCampaignManager() {
+    this->MainCampaign = NULL;
+    this->ActiveCampaign = NULL;
+    this->NumFailedRequests = 0;
+    this->WeeklyBackendDataValid = false;
+    this->WeeklyBackendSeed = -1;
+}
 
 void UCampaignManager::StartNewCampaign(TSubclassOf<UCampaign> campaignClass, UFSDSaveGame* SaveGame) {
 }
@@ -59,11 +60,4 @@ void UCampaignManager::CompleteCampaignWithNoMissions(TSubclassOf<UCampaign> cam
 void UCampaignManager::AbortActiveCampaign(UFSDSaveGame* SaveGame) {
 }
 
-UCampaignManager::UCampaignManager() {
-    this->MainCampaign = NULL;
-    this->ActiveCampaign = NULL;
-    this->NumFailedRequests = 0;
-    this->WeeklyBackendDataValid = false;
-    this->WeeklyBackendSeed = -1;
-}
 

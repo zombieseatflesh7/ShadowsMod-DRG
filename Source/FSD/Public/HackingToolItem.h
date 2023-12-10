@@ -10,13 +10,14 @@ class FSD_API AHackingToolItem : public AAnimatedItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere, Export, Transient, ReplicatedUsing=OnRep_HackingUsable, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, ReplicatedUsing=OnRep_HackingUsable, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UHackingUsableComponent> HackingUsable;
     
 public:
-    AHackingToolItem();
+    AHackingToolItem(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_HackingCompleted(UHackingUsableComponent* InUsable, bool InHackingSuccessful);
@@ -25,7 +26,13 @@ protected:
     void ReceiveHackingStarted();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void ReceiveClick();
+    void ReceivedActionReleased();
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void ReceivedActionPressed();
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void ReceiveActionClick();
     
     UFUNCTION(BlueprintCallable)
     void OnRep_HackingUsable();

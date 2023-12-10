@@ -3,6 +3,7 @@
 #include "UObject/NoExportTypes.h"
 #include "UObject/Object.h"
 #include "GameplayTagContainer.h"
+#include "AssetsToLoadSettings.h"
 #include "GDAudio.h"
 #include "GDCharacterRetirement.h"
 #include "GDDamageClasses.h"
@@ -49,8 +50,10 @@ class UHUDVisibilityGroup;
 class UInventoryList;
 class UItemSettings;
 class UItemSkinSettings;
+class UKPISettings;
 class UKeyBindingSettings;
 class ULegacySettings;
+class UMilestoneAsset;
 class UMinersManual;
 class UMissionStat;
 class UPickaxeSettings;
@@ -71,16 +74,25 @@ class UTreasureSettings;
 class UUpgradeSettings;
 class UVanitySettings;
 class UVictoryPoseSettings;
+class UWeaponMaintenanceSettings;
 
 UCLASS(Blueprintable)
 class FSD_API UGameData : public UObject {
     GENERATED_BODY()
+public:
+protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UKPISettings* KPI_Settings;
+    
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGVisibilityGroups VisibilityGroups;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPromotionRewardsSettings* PromotionRewardsSettings;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UWeaponMaintenanceSettings* WeaponMaintenanceSettings;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -189,15 +201,6 @@ protected:
     USaveGameSettings* SaveGameSettings;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FGDMissionStats MissionStats;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FGDMilestones Milestones;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FGDPerks perks;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGDItemCategoryIDs ItemCategoryIDs;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -257,8 +260,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTag XBoxExcludeRoomTag;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FAssetsToLoadSettings AssetsToLoad;
+    
 public:
     UGameData();
+
     UFUNCTION(BlueprintCallable)
     void UnloadPreloadedAssets();
     
@@ -276,6 +283,15 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UPlayerCharacterID* GetPlayerCharacterID(const FGuid& ID) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FGDPerks GetPerkData() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FGDMissionStats GetMissionStats() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FGDMilestones GetMileStonesData() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UInventoryList* GetInventoryList(UPlayerCharacterID* characterID) const;
@@ -300,6 +316,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UMissionStat*> GetAllMissionStats() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    TArray<UMilestoneAsset*> GetAllMilestones() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UMissionStat*> GetAllInfirmaryStats() const;

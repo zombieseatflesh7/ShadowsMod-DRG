@@ -1,11 +1,14 @@
 #include "MissionStat.h"
 #include "Templates/SubclassOf.h"
 
-class APlayerCharacter;
-class UMissionStat;
-class UObject;
-class UPlayerCharacterID;
-class UTexture2D;
+UMissionStat::UMissionStat() {
+    this->Category = NULL;
+    this->StatAchievement = NULL;
+    this->MissionStatType = EMissionStatType::Float;
+    this->DoNotShowInMissionStatView = false;
+    this->ShowAllValuesCombined = true;
+    this->ShowHighestValue = true;
+}
 
 float UMissionStat::SetStatValue(UObject* WorldContext, APlayerCharacter* Character, float Amount) {
     return 0.0f;
@@ -66,12 +69,4 @@ FText UMissionStat::GetCategoryTitle() const {
     return FText::GetEmpty();
 }
 
-UMissionStat::UMissionStat() {
-    this->Category = NULL;
-    this->StatAchievement = NULL;
-    this->MissionStatType = EMissionStatType::Float;
-    this->DoNotShowInMissionStatView = false;
-    this->ShowAllValuesCombined = true;
-    this->ShowHighestValue = true;
-}
 

@@ -2,7 +2,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "DropPod.h"
+#include "DroppableOutpost.h"
 #include "EInputKeys.h"
 #include "EPipelineBuildState.h"
 #include "ERefineryState.h"
@@ -18,7 +18,7 @@ class UDialogDataAsset;
 class USingleUsableComponent;
 
 UCLASS(Blueprintable)
-class FSD_API AFSDRefinery : public ADropPod {
+class FSD_API AFSDRefinery : public ADroppableOutpost {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRefineryStateDelegate, ERefineryState, InRefineryState);
@@ -86,9 +86,10 @@ protected:
     TArray<APipelineStart*> PipelineStarts;
     
 public:
-    AFSDRefinery();
+    AFSDRefinery(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void SetRefineryState(ERefineryState InState);

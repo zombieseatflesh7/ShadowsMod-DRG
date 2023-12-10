@@ -23,41 +23,143 @@
 #include "PlayerHealthComponent.h"
 #include "PlayerInfectionComponent.h"
 #include "PlayerInfoComponent.h"
+#include "PlayerMovementComponent.h"
 #include "PlayerReactiveTerrainTrackerComponent.h"
 #include "PlayerTemperatureComponent.h"
 #include "SingleUsableComponent.h"
 #include "StatusEffectsComponent.h"
 
-class AActor;
-class ADamageEnhancer;
-class AEventRewardDispenser;
-class AFSDPhysicsActor;
-class AFSDPlayerController;
-class AFSDPlayerState;
-class AItem;
-class APlayerCharacter;
-class APlayerController;
-class AShieldGeneratorActor;
-class AZipLineProjectile;
-class UAnimMontage;
-class UAudioComponent;
-class UCappedResource;
-class UCharacterStateComponent;
-class UEnemyDescriptor;
-class UFSDPhysicalMaterial;
-class UInventoryList;
-class UMaterialInstanceDynamic;
-class UObject;
-class UParticleSystem;
-class UPerkHUDActivationWidget;
-class UPlayerAnimInstance;
-class UPlayerFPAnimInstance;
-class UPlayerTPAnimInstance;
-class USchematic;
-class USoundAttenuation;
-class USoundBase;
-class USoundConcurrency;
-class UTexture2D;
+APlayerCharacter::APlayerCharacter(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer.SetDefaultSubobjectClass<UPlayerMovementComponent>(TEXT("CharMoveComp"))) {
+    this->HeightenedSenseComponent = NULL;
+    this->JetBootsComponentSpawnable = NULL;
+    this->ZipLineStateComponent = NULL;
+    this->BoundPerkActivationW = NULL;
+    this->PerkActivationTimer = -1.00f;
+    this->GrabbedByClass = NULL;
+    this->bIsBeingBittenByCaveLeech = false;
+    this->WidgetInteraction = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("WidgetInteraction"));
+    this->EquipLaserpointerHoldDuration = 0.33f;
+    this->IsPressingMovementInputKey = false;
+    this->characterID = NULL;
+    this->FPMesh = CreateDefaultSubobject<UFirstPersonSkeletalMeshComponent>(TEXT("FPMesh"));
+    this->FirstPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
+    this->FirstPersonRoot = CreateDefaultSubobject<USceneComponent>(TEXT("FPRoot"));
+    this->ActorTracking = CreateDefaultSubobject<UActorTrackingComponent>(TEXT("ActorTracking"));
+    this->IntoxicationComponent = NULL;
+    this->MissionStatsCollector = CreateDefaultSubobject<UMissionStatsCollector>(TEXT("MissionStatsCollector"));
+    this->ThirdPersonSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("ThirdPersonSpringArm"));
+    this->ThirdPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ThirdPersonCamera"));
+    this->ThirdPersonLight = CreateDefaultSubobject<UPointLightComponent>(TEXT("ThirdPersonLight"));
+    this->FollowSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("FollowSpringArm"));
+    this->FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
+    this->DownCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("DownCamera"));
+    this->CameraController = CreateDefaultSubobject<UCharacterCameraController>(TEXT("CameraController"));
+    this->HealthComponent = CreateDefaultSubobject<UPlayerHealthComponent>(TEXT("Health"));
+    this->SightComponent = CreateDefaultSubobject<UCharacterSightComponent>(TEXT("SightComponent"));
+    this->InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
+    this->UseComponentNew = CreateDefaultSubobject<UCharacterUseComponent>(TEXT("UseComponentNew"));
+    this->UsableComponent = CreateDefaultSubobject<USingleUsableComponent>(TEXT("UsableComponent"));
+    this->OutlineComponent = CreateDefaultSubobject<UOutlineComponent>(TEXT("OutlineComponent"));
+    this->RecoilComponent = CreateDefaultSubobject<UCharacterRecoilComponent>(TEXT("RecoilComponent"));
+    this->StatusEffectsComponent = CreateDefaultSubobject<UStatusEffectsComponent>(TEXT("StatusEffects"));
+    this->PawnStatsComponent = CreateDefaultSubobject<UPawnStatsComponent>(TEXT("PawnStats"));
+    this->PawnAfflictionComponent = CreateDefaultSubobject<UPlayerAfflictionComponent>(TEXT("PawnAfflictions"));
+    this->PlayerInfoComponent = CreateDefaultSubobject<UPlayerInfoComponent>(TEXT("PlayerInfoComponent"));
+    this->AttackerPositioningComponent = CreateDefaultSubobject<UPlayerAttackPositionComponent>(TEXT("AttackerPositioning"));
+    this->CommunicationComponent = CreateDefaultSubobject<UCommunicationComponent>(TEXT("Communication"));
+    this->TemperatureComponent = CreateDefaultSubobject<UPlayerTemperatureComponent>(TEXT("TemperatureComponent"));
+    this->InfectionComponent = CreateDefaultSubobject<UPlayerInfectionComponent>(TEXT("InfectionComponent"));
+    this->ReactiveTerrainTracker = CreateDefaultSubobject<UPlayerReactiveTerrainTrackerComponent>(TEXT("TerrainTracker"));
+    this->TrackGrindUsableComponent = CreateDefaultSubobject<UInstantUsable>(TEXT("TrackGrindUsable"));
+    this->RunningSpeed = 0.00f;
+    this->RunBoost = 0.00f;
+    this->RunBoostChargeTime = 0.00f;
+    this->RunBoostActivationSound = NULL;
+    this->RunBoostParticles = NULL;
+    this->RunBoostAffliction = NULL;
+    this->HangingPhysicsAsset = NULL;
+    this->HangingSimulationBlend = 1.00f;
+    this->IsPlayableCharacter = true;
+    this->SprintSoundComponent = NULL;
+    this->SpringSound = NULL;
+    this->DownedCameraMinPitch = -75.00f;
+    this->DownedCameraMaxPitch = 0.00f;
+    this->TurnToFaceScannerAngularSpeed = 180.00f;
+    this->Turn180Time = 0.50f;
+    this->CarryingMovementSpeedPenalty = 0.50f;
+    this->CarryingMaxFallVelocity = 1200.00f;
+    this->MaxThrowProgress = 1.00f;
+    this->MaxThrowHoldDuration = 2.00f;
+    this->CarryingThrowMinForce = 100.00f;
+    this->CarryingThrowMaxForce = 600.00f;
+    this->PlayerVelocityToThrowFactor = 0.00f;
+    this->CarryingThrowingStatusEffect = NULL;
+    this->ThrowCarriableProgress = 0.00f;
+    this->ActiveCharacterState = NULL;
+    this->IsInDropPod = false;
+    this->IsInEscapePod = false;
+    this->ButtonMemoryDuration = 0.25f;
+    this->IsRunning = false;
+    this->CanDash = false;
+    this->DashInputWindow = 0.30f;
+    this->DashFowardMovementMinRequirement = 0.90f;
+    this->DashRightMovementMaxRequirement = 0.10f;
+    this->DashControllerMinValueRequired = 0.50f;
+    this->DashCooldown = 1.00f;
+    this->DashStatusEffect = NULL;
+    this->ForwardInput = 0.00f;
+    this->RightInput = 0.00f;
+    this->ControllerForwardInput = 0.00f;
+    this->ControllerRightInput = 0.00f;
+    this->StoppedRunningTime = -1.00f;
+    this->ShoutPressedTime = -1.00f;
+    this->bIsUsingItemPressed = false;
+    this->bIsUsingPressed = false;
+    this->UsingDelay = 0.00f;
+    this->HeadLightOn = true;
+    this->IsUsing = false;
+    this->JumpPressedTime = 0.00f;
+    this->CanMove = true;
+    this->CanAim = true;
+    this->CanUseItem = true;
+    this->CanChangeItems = true;
+    this->CanMine = true;
+    this->CanSalute = true;
+    this->IsStandingDown = false;
+    this->InDanceRange = false;
+    this->IsDancing = false;
+    this->DanceStartTime = 0.00f;
+    this->HappyFeetAchievement = NULL;
+    this->DanceMove = 0;
+    this->CameraMode = ECharacterCameraMode::FirstPerson;
+    this->IsInCharacterSelectionWorld = false;
+    this->bShouldSpawnAnimEffects = true;
+    this->IdleTime = 0.00f;
+    this->FPDrinkSalute = NULL;
+    this->TPDrinkSalute = NULL;
+    this->CurrentSaluteMontage = NULL;
+    this->BlockTrackGrindOnLanded = false;
+    this->RadarMaterialInstance = NULL;
+    this->RadarMaterialAngleParameterIndex = 0;
+    this->FallbackPhysicalMaterial = NULL;
+    this->ClientReady = false;
+    this->NextCharacterState = NULL;
+    this->PlayerIsLeavingInDroppod = false;
+    this->CanInstantRevive = false;
+    this->HasInitializedPerks = false;
+    this->CharacterVanity = CreateDefaultSubobject<UCharacterVanityComponent>(TEXT("CharacterVanity"));
+    this->ActorTracking->SetupAttachment(RootComponent);
+    this->ThirdPersonSpringArm->SetupAttachment(RootComponent);
+    this->ThirdPersonCamera->SetupAttachment(ThirdPersonSpringArm);
+    this->ThirdPersonLight->SetupAttachment(RootComponent);
+    this->FollowSpringArm->SetupAttachment(RootComponent);
+    this->FollowCamera->SetupAttachment(FollowSpringArm);
+    this->DownCamera->SetupAttachment(RootComponent);
+    this->WidgetInteraction->SetupAttachment(FirstPersonCamera);
+    this->FPMesh->SetupAttachment(FirstPersonRoot);
+    this->FirstPersonCamera->SetupAttachment(FPMesh);
+    this->FirstPersonRoot->SetupAttachment(RootComponent);
+}
 
 void APlayerCharacter::UseZipLine(AZipLineProjectile* ZipLine, const FVector& Start, const FVector& End) {
 }
@@ -194,6 +296,9 @@ void APlayerCharacter::Server_CheatKillAllFriendly_Implementation() {
 void APlayerCharacter::Server_CheatKillAll_Implementation() {
 }
 
+void APlayerCharacter::Server_CheatJetBoots_Implementation() {
+}
+
 void APlayerCharacter::Server_CheatGodMode_Implementation() {
 }
 
@@ -216,6 +321,9 @@ void APlayerCharacter::Server_AddImpulseToActor_Implementation(AFSDPhysicsActor*
 }
 
 void APlayerCharacter::Server_AddImpulse_Implementation(const FVector_NetQuantizeNormal& Direction, float force) {
+}
+
+void APlayerCharacter::Server_ActivateTemporaryBuff_Implementation(UTemporaryBuff* buff) {
 }
 
 void APlayerCharacter::SendLevelUpStatistics(const int32 currentRank) {
@@ -292,6 +400,14 @@ bool APlayerCharacter::IsWithinDistance(AActor* Source, float Distance) const {
 }
 
 bool APlayerCharacter::IsWalking() const {
+    return false;
+}
+
+bool APlayerCharacter::IsUsingPressed() const {
+    return false;
+}
+
+bool APlayerCharacter::IsUsingItemPressed() const {
     return false;
 }
 
@@ -503,6 +619,9 @@ void APlayerCharacter::Client_OpenMinersManual_Implementation() {
 void APlayerCharacter::Client_AddImpulse_Implementation(const FVector_NetQuantizeNormal& Direction, float force) {
 }
 
+void APlayerCharacter::Client_ActivateTemporaryBuff_Implementation(UTemporaryBuff* buff) {
+}
+
 void APlayerCharacter::CheckWithoutAPaddleAchievement_Implementation() {
 }
 
@@ -565,121 +684,4 @@ void APlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
     DOREPLIFETIME(APlayerCharacter, PlayerIsLeavingInDroppod);
 }
 
-APlayerCharacter::APlayerCharacter() {
-    this->HeightenedSenseComponent = NULL;
-    this->ZipLineStateComponent = NULL;
-    this->BoundPerkActivationW = NULL;
-    this->PerkActivationTimer = -1.00f;
-    this->GrabbedByClass = NULL;
-    this->bIsBeingBittenByCaveLeech = false;
-    this->WidgetInteraction = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("WidgetInteraction"));
-    this->EquipLaserpointerHoldDuration = 0.33f;
-    this->IsPressingMovementInputKey = false;
-    this->characterID = NULL;
-    this->FPMesh = CreateDefaultSubobject<UFirstPersonSkeletalMeshComponent>(TEXT("FPMesh"));
-    this->FirstPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
-    this->FirstPersonRoot = CreateDefaultSubobject<USceneComponent>(TEXT("FPRoot"));
-    this->ActorTracking = CreateDefaultSubobject<UActorTrackingComponent>(TEXT("ActorTracking"));
-    this->IntoxicationComponent = NULL;
-    this->MissionStatsCollector = CreateDefaultSubobject<UMissionStatsCollector>(TEXT("MissionStatsCollector"));
-    this->ThirdPersonSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("ThirdPersonSpringArm"));
-    this->ThirdPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ThirdPersonCamera"));
-    this->ThirdPersonLight = CreateDefaultSubobject<UPointLightComponent>(TEXT("ThirdPersonLight"));
-    this->FollowSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("FollowSpringArm"));
-    this->FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
-    this->DownCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("DownCamera"));
-    this->CameraController = CreateDefaultSubobject<UCharacterCameraController>(TEXT("CameraController"));
-    this->HealthComponent = CreateDefaultSubobject<UPlayerHealthComponent>(TEXT("Health"));
-    this->SightComponent = CreateDefaultSubobject<UCharacterSightComponent>(TEXT("SightComponent"));
-    this->InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
-    this->UseComponentNew = CreateDefaultSubobject<UCharacterUseComponent>(TEXT("UseComponentNew"));
-    this->UsableComponent = CreateDefaultSubobject<USingleUsableComponent>(TEXT("UsableComponent"));
-    this->OutlineComponent = CreateDefaultSubobject<UOutlineComponent>(TEXT("OutlineComponent"));
-    this->RecoilComponent = CreateDefaultSubobject<UCharacterRecoilComponent>(TEXT("RecoilComponent"));
-    this->StatusEffectsComponent = CreateDefaultSubobject<UStatusEffectsComponent>(TEXT("StatusEffects"));
-    this->PawnStatsComponent = CreateDefaultSubobject<UPawnStatsComponent>(TEXT("PawnStats"));
-    this->PawnAfflictionComponent = CreateDefaultSubobject<UPlayerAfflictionComponent>(TEXT("PawnAfflictions"));
-    this->PlayerInfoComponent = CreateDefaultSubobject<UPlayerInfoComponent>(TEXT("PlayerInfoComponent"));
-    this->AttackerPositioningComponent = CreateDefaultSubobject<UPlayerAttackPositionComponent>(TEXT("AttackerPositioning"));
-    this->CommunicationComponent = CreateDefaultSubobject<UCommunicationComponent>(TEXT("Communication"));
-    this->TemperatureComponent = CreateDefaultSubobject<UPlayerTemperatureComponent>(TEXT("TemperatureComponent"));
-    this->InfectionComponent = CreateDefaultSubobject<UPlayerInfectionComponent>(TEXT("InfectionComponent"));
-    this->ReactiveTerrainTracker = CreateDefaultSubobject<UPlayerReactiveTerrainTrackerComponent>(TEXT("TerrainTracker"));
-    this->TrackGrindUsableComponent = CreateDefaultSubobject<UInstantUsable>(TEXT("TrackGrindUsable"));
-    this->RunningSpeed = 0.00f;
-    this->RunBoost = 0.00f;
-    this->RunBoostChargeTime = 0.00f;
-    this->RunBoostActivationSound = NULL;
-    this->RunBoostParticles = NULL;
-    this->RunBoostAffliction = NULL;
-    this->HangingPhysicsAsset = NULL;
-    this->HangingSimulationBlend = 1.00f;
-    this->IsPlayableCharacter = true;
-    this->SprintSoundComponent = NULL;
-    this->SpringSound = NULL;
-    this->DownedCameraMinPitch = -75.00f;
-    this->DownedCameraMaxPitch = 0.00f;
-    this->TurnToFaceScannerAngularSpeed = 180.00f;
-    this->Turn180Time = 0.50f;
-    this->CarryingMovementSpeedPenalty = 0.50f;
-    this->CarryingMaxFallVelocity = 1200.00f;
-    this->MaxThrowProgress = 1.00f;
-    this->MaxThrowHoldDuration = 2.00f;
-    this->CarryingThrowMinForce = 100.00f;
-    this->CarryingThrowMaxForce = 600.00f;
-    this->CarryingThrowingStatusEffect = NULL;
-    this->ThrowCarriableProgress = 0.00f;
-    this->ActiveCharacterState = NULL;
-    this->IsInDropPod = false;
-    this->IsInEscapePod = false;
-    this->ButtonMemoryDuration = 0.25f;
-    this->IsRunning = false;
-    this->CanDash = false;
-    this->DashInputWindow = 0.30f;
-    this->DashFowardMovementMinRequirement = 0.90f;
-    this->DashRightMovementMaxRequirement = 0.10f;
-    this->DashControllerMinValueRequired = 0.50f;
-    this->DashCooldown = 1.00f;
-    this->DashStatusEffect = NULL;
-    this->ForwardInput = 0.00f;
-    this->RightInput = 0.00f;
-    this->ControllerForwardInput = 0.00f;
-    this->ControllerRightInput = 0.00f;
-    this->StoppedRunningTime = -1.00f;
-    this->ShoutPressedTime = -1.00f;
-    this->bIsUsingItemPressed = false;
-    this->bIsUsingPressed = false;
-    this->UsingDelay = 0.00f;
-    this->HeadLightOn = true;
-    this->IsUsing = false;
-    this->JumpPressedTime = 0.00f;
-    this->CanMove = true;
-    this->CanAim = true;
-    this->CanUseItem = true;
-    this->CanChangeItems = true;
-    this->CanMine = true;
-    this->IsStandingDown = false;
-    this->InDanceRange = false;
-    this->IsDancing = false;
-    this->DanceStartTime = 0.00f;
-    this->HappyFeetAchievement = NULL;
-    this->DanceMove = 0;
-    this->CameraMode = ECharacterCameraMode::FirstPerson;
-    this->IsInCharacterSelectionWorld = false;
-    this->bShouldSpawnAnimEffects = true;
-    this->IdleTime = 0.00f;
-    this->FPDrinkSalute = NULL;
-    this->TPDrinkSalute = NULL;
-    this->CurrentSaluteMontage = NULL;
-    this->BlockTrackGrindOnLanded = false;
-    this->RadarMaterialInstance = NULL;
-    this->RadarMaterialAngleParameterIndex = 0;
-    this->FallbackPhysicalMaterial = NULL;
-    this->ClientReady = false;
-    this->NextCharacterState = NULL;
-    this->PlayerIsLeavingInDroppod = false;
-    this->CanInstantRevive = false;
-    this->HasInitializedPerks = false;
-    this->CharacterVanity = CreateDefaultSubobject<UCharacterVanityComponent>(TEXT("CharacterVanity"));
-}
 

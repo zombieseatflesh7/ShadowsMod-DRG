@@ -5,11 +5,15 @@
 #include "DroneBase.generated.h"
 
 class UDroneStateComponentBase;
+class UPointLightComponent;
 
 UCLASS(Blueprintable)
 class ADroneBase : public ADeepPathfinderCharacter {
     GENERATED_BODY()
 public:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UPointLightComponent* StateLight;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EDroneState DefaultState;
@@ -21,9 +25,10 @@ protected:
     EDroneState CurrentState;
     
 public:
-    ADroneBase();
+    ADroneBase(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_CurrentState(EDroneState Previous);

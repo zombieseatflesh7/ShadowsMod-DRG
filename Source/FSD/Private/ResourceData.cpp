@@ -1,15 +1,5 @@
 #include "ResourceData.h"
 
-class UObject;
-
-float UResourceData::GetOwnedAmount(UObject* WorldContextObject) const {
-    return 0.0f;
-}
-
-bool UResourceData::GetIsTradableCraftingMaterial() const {
-    return false;
-}
-
 UResourceData::UResourceData() {
     this->Icon = NULL;
     this->BuyingPrice = 150;
@@ -27,4 +17,13 @@ UResourceData::UResourceData() {
     this->XPValue = 1;
     this->SeasonXPMultiplier = -1.00f;
 }
+
+float UResourceData::GetOwnedAmount(UObject* WorldContextObject) const {
+    return 0.0f;
+}
+
+bool UResourceData::GetIsTradableCraftingMaterial() const {
+    return false;
+}
+
 

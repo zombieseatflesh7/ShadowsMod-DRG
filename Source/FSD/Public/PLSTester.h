@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Templates/SubclassOf.h"
 #include "PLSTester.generated.h"
 
 class UBiome;
@@ -10,6 +11,7 @@ class UMissionDuration;
 class UMissionMutator;
 class UMissionTemplate;
 class UMissionWarning;
+class UObjective;
 class USpecialEvent;
 
 UCLASS(Blueprintable)
@@ -33,6 +35,9 @@ protected:
     int32 GlobalMissionIndex;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool OptOutOfSeasonContent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionComplexity* limitComplexity;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -43,6 +48,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UMissionWarning*> Warnings;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<TSubclassOf<UObjective>> SecondaryObjectives;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USpecialEvent* SpecialEvent;
@@ -66,6 +74,7 @@ protected:
     FText CustomMissionName;
     
 public:
-    APLSTester();
+    APLSTester(const FObjectInitializer& ObjectInitializer);
+
 };
 

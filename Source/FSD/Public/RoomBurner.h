@@ -102,10 +102,11 @@ private:
     URoomGenerator* LiveEditRoomGenerator;
     
 public:
-    ARoomBurner();
+    ARoomBurner(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
-    void SpawnEncounter(AProceduralSetup* setup);
+    void SpawnEncounter(AProceduralSetup* Setup);
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)

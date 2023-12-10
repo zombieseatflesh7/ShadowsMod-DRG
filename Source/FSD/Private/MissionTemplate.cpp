@@ -1,18 +1,15 @@
 #include "MissionTemplate.h"
 #include "Templates/SubclassOf.h"
 
-class AProceduralSetup;
-class UBiome;
-class UFSDSaveGame;
-class UGeneratedMission;
-class UMissionComplexity;
-class UMissionDuration;
-class UMissionMutator;
-class UMissionTemplate;
-class UMissionWarning;
-class UObject;
-class UObjective;
-class UTexture2D;
+UMissionTemplate::UMissionTemplate() {
+    this->PrimaryObjective = NULL;
+    this->MissionIcon = NULL;
+    this->MissionIconSmall = NULL;
+    this->MissionTypeIndex = 0;
+    this->MustBeUnlocked = true;
+    this->RoomEncounerScale = 1.00f;
+    this->StationaryEnemyScale = 1.00f;
+}
 
 
 bool UMissionTemplate::IsLocked(UFSDSaveGame* SaveGame) const {
@@ -59,17 +56,8 @@ UTexture2D* UMissionTemplate::GetMissionButtonImage() const {
     return NULL;
 }
 
-UGeneratedMission* UMissionTemplate::GenerateMission(const UObject* WorldContextObject, UBiome* Biome, int32 Seed, int32 GlobalSeed, int32 missionIndex, UMissionComplexity* limitComplexity, UMissionDuration* limitDuration, UMissionMutator* Mutator, TArray<UMissionWarning*> Warnings, TSubclassOf<UObjective> forceSecondary) {
+UGeneratedMission* UMissionTemplate::GenerateMission(const UObject* WorldContextObject, UBiome* Biome, int32 Seed, int32 GlobalSeed, int32 missionIndex, UMissionComplexity* limitComplexity, UMissionDuration* limitDuration, UMissionMutator* Mutator, TArray<UMissionWarning*> Warnings, TArray<TSubclassOf<UObjective>> forceSecondary) {
     return NULL;
 }
 
-UMissionTemplate::UMissionTemplate() {
-    this->PrimaryObjective = NULL;
-    this->MissionIcon = NULL;
-    this->MissionIconSmall = NULL;
-    this->MissionTypeIndex = 0;
-    this->MustBeUnlocked = true;
-    this->RoomEncounerScale = 1.00f;
-    this->StationaryEnemyScale = 1.00f;
-}
 

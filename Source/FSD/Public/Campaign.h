@@ -16,6 +16,7 @@ class UDialogDataAsset;
 class UDifficultySetting;
 class UGameActivityAssignmentType;
 class UMissionStat;
+class UMissionWarning;
 class UPlayerCharacterID;
 class UReward;
 class UTexture2D;
@@ -103,8 +104,12 @@ protected:
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     ECampaignMutators Mutators;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<UMissionWarning*> BannedWarnings;
+    
 public:
     UCampaign();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsComplete() const;
     

@@ -16,11 +16,15 @@ class UPerkFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     UPerkFunctionLibrary();
+
     UFUNCTION(BlueprintCallable)
     static void SplitPerksByUsage(const TArray<UPerkAsset*>& perks, TArray<UPerkAsset*>& OutPassivePerks, TArray<UPerkAsset*>& OutActivePerks);
     
     UFUNCTION(BlueprintCallable)
     static TArray<UPerkAsset*> SortPerksByUsage(UPARAM(Ref) TArray<UPerkAsset*>& perks);
+    
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
+    static void RandomizePerkLoadout(UObject* WorldContext, UPlayerCharacterID* characterID);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     static bool IsPerkTierUnLocked(UObject* WorldContext, int32 Tier);

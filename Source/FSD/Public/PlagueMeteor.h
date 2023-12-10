@@ -89,9 +89,10 @@ protected:
     TArray<ARockCrackerPod*> SpawnedPods;
     
 public:
-    APlagueMeteor();
+    APlagueMeteor(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SignalEventStarted();
@@ -155,7 +156,7 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void DropRockCrackerPods(int32 Amount, float MinRadius, float maRadius, AProceduralSetup* setup);
+    void DropRockCrackerPods(int32 Amount, float MinRadius, float maRadius, AProceduralSetup* Setup);
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)

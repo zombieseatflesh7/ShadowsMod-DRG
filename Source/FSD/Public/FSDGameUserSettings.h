@@ -14,6 +14,7 @@
 #include "ControllerSettings.h"
 #include "CustomKeyBinding.h"
 #include "CustomKeyBindingsChangedDelegate.h"
+#include "DelegateDelegate.h"
 #include "EConsoleGraphicsMode.h"
 #include "EFSDInputSource.h"
 #include "ENVidiaReflexMode.h"
@@ -37,10 +38,13 @@ class UFSDGameUserSettings;
 class UObject;
 class USoundClass;
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class UFSDGameUserSettings : public UGameUserSettings {
     GENERATED_BODY()
 public:
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FDelegate OnSettingsChanged;
+    
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBoolConfigChanged OnUseHoldToRunChanged;
     
@@ -151,6 +155,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     ENVidiaReflexMode ReflexMode;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float WeaponSpwayScale;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USoundClass* soundClassCharacterVoices;
@@ -394,6 +401,7 @@ protected:
     
 public:
     UFSDGameUserSettings();
+
     UFUNCTION(BlueprintCallable)
     void UpdateVolumeSettings(USoundClass* CharacterVoices, USoundClass* MissionControl, USoundClass* Master, USoundClass* Music, USoundClass* SFX, USoundClass* UI, USoundClass* Voice);
     
@@ -411,6 +419,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetZiplineGunAutoSwitch(bool shouldAutoSwitch);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetWeaponSwayScale(float Scale);
     
     UFUNCTION(BlueprintCallable)
     void SetVSyncEnabledToBeApplied(bool bEnable);
@@ -530,6 +541,9 @@ public:
     void SetModdingSortBy(uint8 SortField, bool SortAscending);
     
     UFUNCTION(BlueprintCallable)
+    void SetLensFlaresEnabled(bool Enabled);
+    
+    UFUNCTION(BlueprintCallable)
     void SetJukeboxStreamerMode(bool InStreamerMode);
     
     UFUNCTION(BlueprintCallable)
@@ -543,6 +557,12 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetInputSource(EFSDInputSource NewSource);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetHoldToFire(bool HoldToFire);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetHoldToBreakImmobilization(bool holdToBreak);
     
     UFUNCTION(BlueprintCallable)
     void SetHeadBobbingScale(float NewHeadbobbingScale);
@@ -611,6 +631,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetCameraShakeScale(float NewCameraShakeScale);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetBloomEnabled(bool Enabled);
     
     UFUNCTION(BlueprintCallable)
     void SetAutoRefreshServerlist(bool Value);
@@ -690,6 +713,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetZiplineGunAutoSwitch() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetWeaponSwayScale() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetVSyncEnabledToBeApplied();
@@ -799,6 +825,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetModdingServerFilterEnabled(uint8 ServerFilter);
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetLensFlaresEnabled() const;
+    
 protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetIsDifficultySelected(UDifficultySetting* Difficulty) const;
@@ -815,6 +844,12 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static EFSDInputSource GetInputSource();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetHoldToFire() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetHoldToBreakImmobilization() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetHeadBobbingScale() const;
@@ -881,6 +916,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetCameraShakeScale() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetBloomEnabled() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     bool GetAvaliableAudioOutputDevices(UObject* WorldContextObject, TArray<FString>& AudioDevices);

@@ -28,10 +28,10 @@ class ADeepCSGWorld;
 class AFSDGameState;
 class AFSDPlayerState;
 class AGameStats;
-class AMiningPod;
 class APlayerCharacter;
 class APlayerState;
 class AProceduralSetup;
+class ATeamTransport;
 class UAttackerManagerComponent;
 class UDifficultyManager;
 class UDifficultySetting;
@@ -101,7 +101,7 @@ public:
     int32 CurrentLevel;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
-    AMiningPod* EscapePod;
+    ATeamTransport* EscapePod;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_FSDSessionID, meta=(AllowPrivateAccess=true))
     FString FSDSessionID;
@@ -281,6 +281,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_CountdownText, meta=(AllowPrivateAccess=true))
     FText countdownText;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    int32 HostGlobalSeed;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CanCarryOverResources;
     
@@ -291,9 +294,10 @@ protected:
     APlayerState* CurrentPlayerSessionLeader;
     
 public:
-    AFSDGameState();
+    AFSDGameState(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
     static void WaitForInitialGenerationDone(AFSDGameState* GameState, FLatentActionInfo LatentInfo);
     
@@ -433,7 +437,7 @@ public:
     TArray<FCreditsReward> GetMissionRewardCredits() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool GetMissionCompletedCreditReward(bool primary, int32& OutReward) const;
+    bool GetMissionCompletedCreditReward(bool Primary, int32& OutReward) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetGlobalMissionSeed() const;

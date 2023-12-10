@@ -4,6 +4,7 @@
 #include "Engine/EngineTypes.h"
 #include "DroneStream.generated.h"
 
+class ABosco;
 class UCapsuleComponent;
 class UPrimitiveComponent;
 class USceneComponent;
@@ -26,13 +27,20 @@ protected:
     bool CheckEndOverlaps;
     
 public:
-    ADroneStream();
+    ADroneStream(const FObjectInitializer& ObjectInitializer);
+
 protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void Receive_OnAbilityDataSet();
+    
     UFUNCTION(BlueprintCallable)
     void OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
     
     UFUNCTION(BlueprintCallable)
     void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    ABosco* GetBosco() const;
     
 };
 

@@ -35,9 +35,6 @@ public:
     FItemUpgradeCraftSignature OnItemUpgradeCrafted;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FItemUpgradeEquipSignature OnItemUpgradeEquipped;
-    
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FItemUpgradeEquipSignature OnItemUpgradeUnequipped;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -78,9 +75,10 @@ protected:
     TArray<FCharacterProgress> CharacterStats;
     
 public:
-    USaveGameStateComponent();
+    USaveGameStateComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SetCampaign();
     
@@ -127,11 +125,11 @@ protected:
     void OnRep_ActiveCampaignMission();
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsActiveCampaignMission(UGeneratedMission* mission) const;
+    
     UFUNCTION(BlueprintCallable)
     FCharacterProgress GetCharacterStat(UPlayerCharacterID* characterID);
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    UGeneratedMission* GetActiveCampaignMission() const;
     
 };
 

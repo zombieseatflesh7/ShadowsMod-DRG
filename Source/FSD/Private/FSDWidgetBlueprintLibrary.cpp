@@ -1,31 +1,8 @@
 #include "FSDWidgetBlueprintLibrary.h"
 #include "Templates/SubclassOf.h"
 
-class AFSDPlayerState;
-class APlayerController;
-class UCanvasPanel;
-class UCanvasPanelSlot;
-class UFSDCheatManager;
-class UHorizontalBox;
-class UHorizontalBoxSlot;
-class UImage;
-class UObject;
-class UOverlay;
-class UOverlaySlot;
-class UPanelWidget;
-class UProgressBar;
-class USizeBox;
-class USpacer;
-class UTextBlock;
-class UTexture2D;
-class UUniformGridPanel;
-class UUniformGridSlot;
-class UUserWidget;
-class UVerticalBox;
-class UVerticalBoxSlot;
-class UWidget;
-class UWidgetAnimation;
-class UWindowWidget;
+UFSDWidgetBlueprintLibrary::UFSDWidgetBlueprintLibrary() {
+}
 
 void UFSDWidgetBlueprintLibrary::ToggleAnimationLooping(UObject* WorldContext, UWidgetAnimation* InAnimation, FWidgetAnimationSettings InSettings, bool InLoop, bool& OutPlayingChanged, bool& OutIsPlaying) {
 }
@@ -215,6 +192,10 @@ FText UFSDWidgetBlueprintLibrary::ClampTextLength(const FText& Text, int32 MaxLe
 void UFSDWidgetBlueprintLibrary::Box(FPaintContext& Context, FVector2D Position, FVector2D Size, const FSlateBrush& Brush, FLinearColor Tint) {
 }
 
+bool UFSDWidgetBlueprintLibrary::AreWidgetsIntersecting(const UWidget* InWidget1, const UWidget* InWidget2) {
+    return false;
+}
+
 UWidget* UFSDWidgetBlueprintLibrary::AddWidgetToRow(UVerticalBox* VerticalBox, UWidget* Widget, int32 MaxWidgetsPerRow, float WidgetSpacing, float RowSpacing, UHorizontalBoxSlot*& OutSlot, UHorizontalBox*& OutRow) {
     return NULL;
 }
@@ -239,6 +220,4 @@ UWidget* UFSDWidgetBlueprintLibrary::AddChildToCanvasEx(UCanvasPanel* CanvasPane
     return NULL;
 }
 
-UFSDWidgetBlueprintLibrary::UFSDWidgetBlueprintLibrary() {
-}
 

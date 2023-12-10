@@ -1,13 +1,8 @@
 #include "SessionHandling.h"
 #include "Templates/SubclassOf.h"
 
-class APlayerCharacter;
-class UBiome;
-class UDifficultySetting;
-class UFSDGameInstance;
-class UMissionTemplate;
-class UObject;
-class UPlayerCharacterID;
+USessionHandling::USessionHandling() {
+}
 
 void USessionHandling::StopVoice(UObject* WorldContextObject) {
 }
@@ -237,6 +232,4 @@ bool USessionHandling::AllowLinkToExternalFeedback(UObject* WorldContextObject) 
     return false;
 }
 
-USessionHandling::USessionHandling() {
-}
 

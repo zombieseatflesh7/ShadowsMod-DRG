@@ -1,9 +1,7 @@
 #include "DSTelemetry.h"
 
-class UDJSONArray;
-class UDJSONObject;
-class UDSTelemetry;
-class UObject;
+UDSTelemetry::UDSTelemetry() {
+}
 
 void UDSTelemetry::Terminate() {
 }
@@ -106,6 +104,4 @@ UDSTelemetry* UDSTelemetry::CreateTelemetry(UObject* WorldContextObject) {
     return NULL;
 }
 
-UDSTelemetry::UDSTelemetry() {
-}
 

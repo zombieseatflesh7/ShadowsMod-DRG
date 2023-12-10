@@ -19,8 +19,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool EffectIsActive;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool ActivatesOnlyOnceWhenDrinking;
+    
 public:
-    UDrinkEffectComponent();
+    UDrinkEffectComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void StopEffect();
@@ -33,6 +37,10 @@ protected:
     
     UFUNCTION(BlueprintCallable)
     static void OnChangedCharacter(APlayerCharacter* changedToCharacter, UClass* DrinkEffectClass);
+    
+public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetActivateOnlyWhenDrinking() const;
     
 };
 

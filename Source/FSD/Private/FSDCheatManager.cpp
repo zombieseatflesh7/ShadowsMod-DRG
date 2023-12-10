@@ -1,16 +1,14 @@
 #include "FSDCheatManager.h"
 #include "Templates/SubclassOf.h"
 
-class AActor;
-class AFSDAIController;
-class APawn;
-class APlayerCharacter;
-class UBaseCritterDescriptor;
-class UEnemyDescriptor;
-class UItemID;
-class UObject;
-class UPlayerCharacterID;
-class UResourceData;
+UFSDCheatManager::UFSDCheatManager() {
+    this->RoomJumpCount = 0;
+    this->PreviousMaxDistanceBeforeCleanup = 0.00f;
+    this->UnlimitedScoutFlareDuration = false;
+    this->SpawnPosMarker = NULL;
+    this->EscortShowSmartRockDebug = false;
+    this->IsUsingSavedCheats = false;
+}
 
 void UFSDCheatManager::SwitchCharacter(UPlayerCharacterID* characterID) {
 }
@@ -49,7 +47,7 @@ void UFSDCheatManager::SetGodMode(bool God) {
 void UFSDCheatManager::SetFastMovement(bool fast) {
 }
 
-void UFSDCheatManager::Server_Refresh_Daily_Special_Implementation() {
+void UFSDCheatManager::Server_Refresh_Daily_Special_Implementation(int32 Index) {
 }
 
 void UFSDCheatManager::ResetTutorials() {
@@ -233,6 +231,12 @@ void UFSDCheatManager::C_Windows_PrintStack() const {
 void UFSDCheatManager::C_Windows_CloseAll() const {
 }
 
+void UFSDCheatManager::C_WeaponMaintenance_Reset() {
+}
+
+void UFSDCheatManager::C_WeaponMaintenance_AddXP(int32 XP) {
+}
+
 void UFSDCheatManager::C_VanityMasteryResetXP() {
 }
 
@@ -303,6 +307,9 @@ void UFSDCheatManager::C_ToggleFadingDebug() {
 }
 
 void UFSDCheatManager::C_ToggleCanShowBlood() {
+}
+
+void UFSDCheatManager::C_TestSpecialEventChance() {
 }
 
 void UFSDCheatManager::C_StopMovement(bool shouldMove) {
@@ -380,7 +387,16 @@ void UFSDCheatManager::C_Seasons_ResetPlagueHeartsCollected() {
 void UFSDCheatManager::C_Seasons_IncrementChallenge(int32 Index) {
 }
 
+void UFSDCheatManager::C_Seasons_CompleteSeasonAlmost() {
+}
+
+void UFSDCheatManager::C_Seasons_CompleteSeason() {
+}
+
 void UFSDCheatManager::C_Seasons_CompleteScripChallenge(int32 Number) {
+}
+
+void UFSDCheatManager::C_Seasons_ClearSeasonCompletedAnnounced() {
 }
 
 void UFSDCheatManager::C_Seasons_ClearChallenges() {
@@ -482,7 +498,7 @@ void UFSDCheatManager::C_RemoveAllWidgets() {
 void UFSDCheatManager::C_RefreshDailyDeal(int32 Seed) {
 }
 
-void UFSDCheatManager::C_Refresh_Daily_Special() {
+void UFSDCheatManager::C_Refresh_Daily_Special(int32 Index) {
 }
 
 void UFSDCheatManager::C_Refinery_BreakPipes() {
@@ -509,7 +525,16 @@ void UFSDCheatManager::C_ProjectileDrawPaths() {
 void UFSDCheatManager::C_ProjectileDebugPrintToggle() {
 }
 
+void UFSDCheatManager::C_PrintLoadout() {
+}
+
+void UFSDCheatManager::C_PlayNewMusic(int32 songIndex) const {
+}
+
 void UFSDCheatManager::C_MissionMap_TestDistribution() {
+}
+
+void UFSDCheatManager::C_MissionMap_SetSeed(int32 Seed) {
 }
 
 void UFSDCheatManager::C_MissionMap_Rotate() {
@@ -554,6 +579,9 @@ void UFSDCheatManager::C_KillAll() {
 void UFSDCheatManager::C_JumpToNextRoom() {
 }
 
+void UFSDCheatManager::C_JetBoots_Enable() {
+}
+
 void UFSDCheatManager::C_Intoxication_SetAll(int32 Percent) {
 }
 
@@ -561,6 +589,9 @@ void UFSDCheatManager::C_Intoxication_Set(int32 Percent) {
 }
 
 void UFSDCheatManager::C_IncrementAllMissionStats(int32 Amount) {
+}
+
+void UFSDCheatManager::C_IncreasePlagueInfection(float Increment) {
 }
 
 void UFSDCheatManager::C_GodMode(int32 forceEnable) {
@@ -573,6 +604,9 @@ void UFSDCheatManager::C_GameDLC_ResetAnnouncements() {
 }
 
 void UFSDCheatManager::C_FSDEvent_SetDebugEvent(const FString& EventName) {
+}
+
+void UFSDCheatManager::C_FSDEvent_ListEvents() {
 }
 
 void UFSDCheatManager::C_FSDEvent_ClearSeenRewards() {
@@ -671,12 +705,4 @@ void UFSDCheatManager::C_AddForgingXP(int32 Number) {
 void UFSDCheatManager::AddResourceToTeamDeposit(UResourceData* Resource, float Amount) {
 }
 
-UFSDCheatManager::UFSDCheatManager() {
-    this->RoomJumpCount = 0;
-    this->PreviousMaxDistanceBeforeCleanup = 0.00f;
-    this->UnlimitedScoutFlareDuration = false;
-    this->SpawnPosMarker = NULL;
-    this->EscortShowSmartRockDebug = false;
-    this->IsUsingSavedCheats = false;
-}
 

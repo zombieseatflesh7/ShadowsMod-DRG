@@ -1,30 +1,8 @@
 #include "ActorFunctionLibrary.h"
 #include "Templates/SubclassOf.h"
 
-class AActor;
-class AFSDGameMode;
-class AFSDGameState;
-class APlayerCharacter;
-class APlayerController;
-class IBlendableInterface;
-class UBlendableInterface;
-class UActorComponent;
-class UEnemyComponent;
-class UFSDPhysicalMaterial;
-class UFXSystemAsset;
-class UInventoryList;
-class UItemID;
-class UMaterialInstanceDynamic;
-class UMeshComponent;
-class UObject;
-class UPathfinderCollisionComponent;
-class UPlayerCharacterID;
-class UPostProcessComponent;
-class USceneComponent;
-class USoundCue;
-class UTexture2D;
-class UUserWidget;
-class UWindowWidget;
+UActorFunctionLibrary::UActorFunctionLibrary() {
+}
 
 void UActorFunctionLibrary::UnlockSpecificCharacters(TArray<APlayerCharacter*> Characters, ECharacterState UnlockIf, ECharacterState UnlockTo) {
 }
@@ -206,7 +184,7 @@ FVector UActorFunctionLibrary::FindLatejoinDroppodLocation(AFSDGameMode* GameMod
     return FVector{};
 }
 
-AActor* UActorFunctionLibrary::FindClosestEnemyFromLocation(const FVector& fromLocation, float range, bool LineOfSightCheck, UObject* WorldContextObject, const TArray<AActor*>& IgnoredActors, const FVector& Offset) {
+AActor* UActorFunctionLibrary::FindClosestEnemyFromLocation(const FVector& fromLocation, float range, bool LineOfSightCheck, UObject* WorldContextObject, const TArray<AActor*>& IgnoredActors, const FVector& Offset, bool onlyTargetable) {
     return NULL;
 }
 
@@ -247,6 +225,4 @@ bool UActorFunctionLibrary::ActorMatchesTagQuery(const FGameplayTagQuery& Query,
     return false;
 }
 
-UActorFunctionLibrary::UActorFunctionLibrary() {
-}
 

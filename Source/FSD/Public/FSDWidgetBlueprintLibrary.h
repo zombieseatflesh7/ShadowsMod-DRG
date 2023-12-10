@@ -56,6 +56,7 @@ public:
     DECLARE_DYNAMIC_DELEGATE_RetVal_TwoParams(bool, FCompareWidgetsDelegate, const UWidget*, InFirstWidget, const UWidget*, InSecondWidget);
     
     UFSDWidgetBlueprintLibrary();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     static void ToggleAnimationLooping(UObject* WorldContext, UWidgetAnimation* InAnimation, FWidgetAnimationSettings InSettings, bool InLoop, bool& OutPlayingChanged, bool& OutIsPlaying);
     
@@ -205,6 +206,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     static void Box(UPARAM(Ref) FPaintContext& Context, FVector2D Position, FVector2D Size, const FSlateBrush& Brush, FLinearColor Tint);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static bool AreWidgetsIntersecting(const UWidget* InWidget1, const UWidget* InWidget2);
     
     UFUNCTION(BlueprintCallable)
     static UWidget* AddWidgetToRow(UVerticalBox* VerticalBox, UWidget* Widget, int32 MaxWidgetsPerRow, float WidgetSpacing, float RowSpacing, UHorizontalBoxSlot*& OutSlot, UHorizontalBox*& OutRow);

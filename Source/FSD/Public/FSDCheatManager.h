@@ -44,6 +44,7 @@ protected:
     
 public:
     UFSDCheatManager();
+
     UFUNCTION(BlueprintCallable)
     void SwitchCharacter(UPlayerCharacterID* characterID);
     
@@ -83,7 +84,7 @@ public:
     void SetFastMovement(bool fast);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_Refresh_Daily_Special();
+    void Server_Refresh_Daily_Special(int32 Index);
     
     UFUNCTION(BlueprintCallable, Exec)
     void ResetTutorials();
@@ -265,6 +266,12 @@ public:
     void C_Windows_CloseAll() const;
     
     UFUNCTION(BlueprintCallable, Exec)
+    void C_WeaponMaintenance_Reset();
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void C_WeaponMaintenance_AddXP(int32 XP);
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void C_VanityMasteryResetXP();
     
     UFUNCTION(BlueprintCallable, Exec)
@@ -335,6 +342,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Exec)
     void C_ToggleCanShowBlood();
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void C_TestSpecialEventChance();
     
     UFUNCTION(BlueprintCallable, Exec)
     void C_StopMovement(bool shouldMove);
@@ -412,7 +422,16 @@ public:
     void C_Seasons_IncrementChallenge(int32 Index);
     
     UFUNCTION(BlueprintCallable, Exec)
+    void C_Seasons_CompleteSeasonAlmost();
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void C_Seasons_CompleteSeason();
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void C_Seasons_CompleteScripChallenge(int32 Number);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void C_Seasons_ClearSeasonCompletedAnnounced();
     
     UFUNCTION(BlueprintCallable, Exec)
     void C_Seasons_ClearChallenges();
@@ -514,7 +533,7 @@ public:
     void C_RefreshDailyDeal(int32 Seed);
     
     UFUNCTION(BlueprintCallable, Exec)
-    void C_Refresh_Daily_Special();
+    void C_Refresh_Daily_Special(int32 Index);
     
     UFUNCTION(BlueprintCallable, Exec)
     void C_Refinery_BreakPipes();
@@ -541,7 +560,16 @@ public:
     void C_ProjectileDebugPrintToggle();
     
     UFUNCTION(BlueprintCallable, Exec)
+    void C_PrintLoadout();
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void C_PlayNewMusic(int32 songIndex) const;
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void C_MissionMap_TestDistribution();
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void C_MissionMap_SetSeed(int32 Seed);
     
     UFUNCTION(BlueprintCallable, Exec)
     void C_MissionMap_Rotate();
@@ -586,6 +614,9 @@ public:
     void C_JumpToNextRoom();
     
     UFUNCTION(BlueprintCallable, Exec)
+    void C_JetBoots_Enable();
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void C_Intoxication_SetAll(int32 Percent);
     
     UFUNCTION(BlueprintCallable, Exec)
@@ -593,6 +624,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Exec)
     void C_IncrementAllMissionStats(int32 Amount);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void C_IncreasePlagueInfection(float Increment);
     
     UFUNCTION(BlueprintCallable, Exec)
     void C_GodMode(int32 forceEnable);
@@ -605,6 +639,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Exec)
     void C_FSDEvent_SetDebugEvent(const FString& EventName);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void C_FSDEvent_ListEvents();
     
     UFUNCTION(BlueprintCallable, Exec)
     void C_FSDEvent_ClearSeenRewards();

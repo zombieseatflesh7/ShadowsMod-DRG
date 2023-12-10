@@ -15,7 +15,6 @@ class APlayerCharacter;
 class UBehaviorTree;
 class UDroneUseComponent;
 class UHealthComponentBase;
-class UMissionWarning;
 class UTerrainMaterial;
 
 UCLASS(Blueprintable)
@@ -41,9 +40,6 @@ public:
     TArray<UTerrainMaterial*> PlagueMaterials;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UMissionWarning* PlagueWarning;
-    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<AActor>> VacuumableTypes;
     
@@ -87,6 +83,9 @@ protected:
     FGameplayTagQuery DefendTageQuery;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayTagQuery VacuumTagQuery;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ReviveHealthPercentage;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
@@ -96,7 +95,8 @@ protected:
     AActor* TryingToPickItem;
     
 public:
-    ABoscoController();
+    ABoscoController(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void ReviveTarget();
     

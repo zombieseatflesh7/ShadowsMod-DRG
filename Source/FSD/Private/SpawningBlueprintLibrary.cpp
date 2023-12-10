@@ -1,8 +1,7 @@
 #include "SpawningBlueprintLibrary.h"
 
-class UEnemyDescriptor;
-class UEnemyGroupDescriptor;
-class UObject;
+USpawningBlueprintLibrary::USpawningBlueprintLibrary() {
+}
 
 void USpawningBlueprintLibrary::SpawnEnemyGroupDescriptorSpreadOut(UObject* WorldContextObject, UEnemyGroupDescriptor* descriptor, float Difficulty, const TArray<FVector>& Locations, bool Alert, DeepPathFinderSize pfSize) {
 }
@@ -46,6 +45,4 @@ FVector USpawningBlueprintLibrary::GetSpawnPointFromLocation(UObject* WorldConte
     return FVector{};
 }
 
-USpawningBlueprintLibrary::USpawningBlueprintLibrary() {
-}
 

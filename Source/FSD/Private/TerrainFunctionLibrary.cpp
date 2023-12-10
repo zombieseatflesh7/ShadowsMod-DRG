@@ -1,13 +1,17 @@
 #include "TerrainFunctionLibrary.h"
 
-class UObject;
-class UTerrainMaterial;
+UTerrainFunctionLibrary::UTerrainFunctionLibrary() {
+}
 
 bool UTerrainFunctionLibrary::GetDebrisTransformsInSphere(UObject* WorldContextObject, TArray<FMatrix>& outPositions, const FVector& Location, const float& Radius, const ESpecialDebrisType& debrisType, float minDistToOther, bool calcPriority) {
     return false;
 }
 
-TArray<FVector> UTerrainFunctionLibrary::GetAllNavPointsInSphere(UObject* WorldContextObject, FVector Origin, float Radius, DeepPathFinderSize pfSize) {
+TArray<FVector> UTerrainFunctionLibrary::GetAllNavPointsInSphere(UObject* WorldContextObject, FVector Origin, float Radius, DeepPathFinderSize pfSize, const FVector searchNormal, float maxDegreesToSearchNormal) {
+    return TArray<FVector>();
+}
+
+TArray<FVector> UTerrainFunctionLibrary::FindPath(UObject* WorldContextObject, FVector Origin, FVector Destination, DeepPathFinderSize pfSize) {
     return TArray<FVector>();
 }
 
@@ -25,6 +29,4 @@ int32 UTerrainFunctionLibrary::CountDebrisInSphere(UObject* WorldContextObject, 
     return 0;
 }
 
-UTerrainFunctionLibrary::UTerrainFunctionLibrary() {
-}
 

@@ -1,9 +1,7 @@
 #include "BossFightSubSystem.h"
 
-class AActor;
-class IBossFightInterface;
-class UBossFightInterface;
-class UUserWidget;
+UBossFightSubSystem::UBossFightSubSystem() {
+}
 
 void UBossFightSubSystem::RemoveCustomBossFightWidget(UUserWidget* InWidget) {
 }
@@ -17,6 +15,4 @@ void UBossFightSubSystem::DeregisterBossFight(AActor* boss) {
 void UBossFightSubSystem::AddCustomBossFightWidget(UUserWidget* InWidget) {
 }
 
-UBossFightSubSystem::UBossFightSubSystem() {
-}
 

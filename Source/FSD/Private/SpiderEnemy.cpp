@@ -3,8 +3,16 @@
 #include "Net/UnrealNetwork.h"
 #include "PawnStatsComponent.h"
 
-class AActor;
-class UStaticMeshComponent;
+ASpiderEnemy::ASpiderEnemy(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->PawnStats = CreateDefaultSubobject<UPawnStatsComponent>(TEXT("PawnStats"));
+    this->HitReactions = CreateDefaultSubobject<UHitReactionComponent>(TEXT("HitReactions"));
+    this->GoreMesh = NULL;
+    this->ApplyDifficultySpeedModifier = true;
+    this->AttackDamageModifier = 1.00f;
+    this->LimitRagdollSpeed = false;
+    this->MaxRagdollSpeed = 1000.00f;
+    this->LookAtTarget = NULL;
+}
 
 void ASpiderEnemy::SetLookAtTarget(AActor* Target) {
 }
@@ -23,14 +31,4 @@ void ASpiderEnemy::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLife
     DOREPLIFETIME(ASpiderEnemy, LookAtTarget);
 }
 
-ASpiderEnemy::ASpiderEnemy() {
-    this->PawnStats = CreateDefaultSubobject<UPawnStatsComponent>(TEXT("PawnStats"));
-    this->HitReactions = CreateDefaultSubobject<UHitReactionComponent>(TEXT("HitReactions"));
-    this->GoreMesh = NULL;
-    this->ApplyDifficultySpeedModifier = true;
-    this->AttackDamageModifier = 1.00f;
-    this->LimitRagdollSpeed = false;
-    this->MaxRagdollSpeed = 1000.00f;
-    this->LookAtTarget = NULL;
-}
 

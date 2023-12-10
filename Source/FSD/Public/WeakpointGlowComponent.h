@@ -3,6 +3,7 @@
 #include "Components/ActorComponent.h"
 #include "Curves/CurveFloat.h"
 #include "DamageData.h"
+#include "EWeakpointGlowMode.h"
 #include "WeakpointChannel.h"
 #include "WeakpointGlowComponent.generated.h"
 
@@ -30,6 +31,9 @@ protected:
     float CurveMultiplier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EWeakpointGlowMode Mode;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UFSDPhysicalMaterial* WeakPointMaterial;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -39,7 +43,8 @@ protected:
     int32 ReplaceMatIndex;
     
 public:
-    UWeakpointGlowComponent();
+    UWeakpointGlowComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     bool StopLoopingGlow(int32 aGlowID, bool aFade);
     

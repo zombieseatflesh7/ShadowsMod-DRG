@@ -1,23 +1,7 @@
 #include "GameFunctionLibrary.h"
 
-class ADeepCSGWorld;
-class AFSDGameMode;
-class AFSDGameModeSpaceRig;
-class AFSDGameState;
-class APlayerCharacter;
-class IMissionModeManager;
-class UMissionModeManager;
-class UAsyncManager;
-class UAudioComponent;
-class UCampaignManager;
-class UFSDGameInstance;
-class UFSDSaveGame;
-class UGameData;
-class UGoogleAnalyticsWrapper;
-class UObject;
-class USoundBase;
-class UWindowManager;
-class UWindowWidget;
+UGameFunctionLibrary::UGameFunctionLibrary() {
+}
 
 void UGameFunctionLibrary::SpawnOrUpdateAudio2D(UObject* WorldContext, UAudioComponent*& AudioComponent, USoundBase* Sound, float VolumeMultiplier, float PitchMultiplier, FName FloatParamName, float FloatParam) {
 }
@@ -39,11 +23,11 @@ void UGameFunctionLibrary::IsTearingDown(UObject* caller, bool& NewIsTearingDown
 }
 
 bool UGameFunctionLibrary::IsPlayingOffline(UObject* WorldContextObject) {
-    return false;
+	return true;
 }
 
 bool UGameFunctionLibrary::IsPlayInEditor(UObject* WorldContextObject) {
-	return true;
+    return false;
 }
 
 UWindowManager* UGameFunctionLibrary::GetWindowManager(UObject* WorldContextObject) {
@@ -130,6 +114,4 @@ UAsyncManager* UGameFunctionLibrary::GetAsyncManager(UObject* WorldContextObject
     return NULL;
 }
 
-UGameFunctionLibrary::UGameFunctionLibrary() {
-}
 

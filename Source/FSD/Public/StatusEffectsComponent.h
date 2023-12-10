@@ -29,7 +29,8 @@ protected:
     bool IgnoreAll;
     
 public:
-    UStatusEffectsComponent();
+    UStatusEffectsComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     static bool TryPushActiveStatusEffect(TSubclassOf<UStatusEffect> StatusEffect, AActor* Target, AActor* Owner);
     
@@ -61,6 +62,12 @@ protected:
 public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintPure)
     bool HasActiveEffect(TSubclassOf<UStatusEffect> StatusEffect) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetStackAmount(TSubclassOf<UStatusEffect> StatusEffect, AActor* Owner) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetFullStackAmount(TSubclassOf<UStatusEffect> StatusEffect) const;
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     static UStatusEffect* CreateStatusEffectInstance(TSubclassOf<UStatusEffect> StatusEffect, UObject* Owner);

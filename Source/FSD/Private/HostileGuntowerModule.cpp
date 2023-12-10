@@ -4,7 +4,14 @@
 #include "EnemyComponent.h"
 #include "Net/UnrealNetwork.h"
 
-class UHealthComponentBase;
+AHostileGuntowerModule::AHostileGuntowerModule(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->DestroyedMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("DestroyedMesh"));
+    this->DestroyedSmoke = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("DestroyedSmoke"));
+    this->EnemyComponent = CreateDefaultSubobject<UEnemyComponent>(TEXT("EnemyComponent"));
+    this->ModuleMaxHealth = 1.00f;
+    this->DestroyedMesh->SetupAttachment(RootComponent);
+    this->DestroyedSmoke->SetupAttachment(DestroyedMesh);
+}
 
 void AHostileGuntowerModule::OnWeakpointDied(UHealthComponentBase* Health) {
 }
@@ -22,10 +29,4 @@ void AHostileGuntowerModule::GetLifetimeReplicatedProps(TArray<FLifetimeProperty
     DOREPLIFETIME(AHostileGuntowerModule, CurrentAimRotation);
 }
 
-AHostileGuntowerModule::AHostileGuntowerModule() {
-    this->DestroyedMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("DestroyedMesh"));
-    this->DestroyedSmoke = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("DestroyedSmoke"));
-    this->EnemyComponent = CreateDefaultSubobject<UEnemyComponent>(TEXT("EnemyComponent"));
-    this->ModuleMaxHealth = 1.00f;
-}
 

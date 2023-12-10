@@ -1,5 +1,13 @@
 #include "UGCSettings.h"
 
+UUGCSettings::UUGCSettings() {
+    this->slot1Icon = 0;
+    this->slot2Icon = 9;
+    this->slot3Icon = 0;
+    this->slot4Icon = 0;
+    this->SelectedSlot = 3;
+}
+
 bool UUGCSettings::WriteToPlainText(const FString& Filename, const FString& TextContent, FText& OutError, bool Append) {
     return false;
 }
@@ -46,14 +54,4 @@ void UUGCSettings::ClearSlot(int32 SlotNumber) {
 void UUGCSettings::CleanupSlots() {
 }
 
-UUGCSettings::UUGCSettings() {
-    this->slot1Icon = 0;
-    this->slot2.AddDefaulted(13);
-    this->slot2Icon = 9;
-    this->slot3.AddDefaulted(41);
-    this->slot3Icon = 0;
-    this->slot4.AddDefaulted(26);
-    this->slot4Icon = 0;
-    this->SelectedSlot = 1;
-}
 

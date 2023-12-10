@@ -1,9 +1,11 @@
 #include "CrosshairAggregator.h"
 
-class APlayerController;
-class UCustomAmmoCountWidget;
-class UObject;
-class UUserWidget;
+UCrosshairAggregator::UCrosshairAggregator(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->CrosshairWidget = NULL;
+    this->CrossHairType = NULL;
+    this->CustomAmmoCounterWidget = NULL;
+    this->CustomAmmoCounterType = NULL;
+}
 
 void UCrosshairAggregator::SetCrosshair(UUserWidget* Widget) {
 }
@@ -16,10 +18,4 @@ UCustomAmmoCountWidget* UCrosshairAggregator::GetCustomAmmoCounterWidget(UObject
     return NULL;
 }
 
-UCrosshairAggregator::UCrosshairAggregator() {
-    this->CrosshairWidget = NULL;
-    this->CrossHairType = NULL;
-    this->CustomAmmoCounterWidget = NULL;
-    this->CustomAmmoCounterType = NULL;
-}
 

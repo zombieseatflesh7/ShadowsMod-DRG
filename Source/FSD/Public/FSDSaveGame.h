@@ -23,7 +23,7 @@
 #include "GameDLCSave.h"
 #include "ItemNotificationInfo.h"
 #include "ItemUINotifications.h"
-#include "ItemUpgradeSelection.h"
+#include "JettyBootsSave.h"
 #include "MilestoneSave.h"
 #include "MissionStatSave.h"
 #include "OptionsInSaveGame.h"
@@ -40,6 +40,8 @@
 #include "VanityMasteryResult.h"
 #include "VanityMasterySave.h"
 #include "WatchedTutorial.h"
+#include "WeaponMaintenance.h"
+#include "WeaponMaintenanceChangedDelegate.h"
 #include "FSDSaveGame.generated.h"
 
 class AActor;
@@ -149,10 +151,16 @@ public:
     TArray<FCharacterPerksSave> EquippedPerkLoadouts;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FCharacterPerksSave RandomEquippedPerkLoadout;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVanityMasterySave VanityMasterySave;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCraftingMasteryChanged OnVanityMasteryChanged;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FJettyBootsSave JettyBootsSave;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSchematicSave SchematicSave;
@@ -168,6 +176,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameDLCSave GameDLCSave;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FWeaponMaintenanceChanged OnWeaponMaintenanceChanged;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FWeaponMaintenance WeaponMaintenance;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -216,10 +230,10 @@ protected:
     FDrinkSave Drinks;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TMap<FGuid, FItemUpgradeSelection> ItemUpgradeSelections;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FUpgradeLoadout> ItemUpgradeLoadouts;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bIgnoreRandomLoadout;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FGuid> PurchasedItemUpgrades;
@@ -270,7 +284,7 @@ protected:
     bool FirstRejoinAttempt;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool HaveSkinsBeenReset;
+    bool HaveItemUpgradesBeenFixed;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bHasOpenedDeepDiveTerminal;
@@ -376,6 +390,7 @@ protected:
     
 public:
     UFSDSaveGame();
+
     UFUNCTION(BlueprintCallable)
     bool TrySellResource(UResourceData* Resource, int32 Amount, int32& Price);
     
@@ -411,6 +426,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetIndexAndName(int32 NewIndex, const FString& NewName);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetIgnoreRandomLoadout(bool inIgnoreRandomLoadout);
     
     UFUNCTION(BlueprintCallable)
     void SetHasSentSteamInfo();

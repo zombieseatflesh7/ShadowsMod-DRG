@@ -1,6 +1,7 @@
 #include "AsyncManager.h"
 
-class UObject;
+UAsyncManager::UAsyncManager() {
+}
 
 UObject* UAsyncManager::SyncLoadAsset(const TSoftObjectPtr<UObject>& Asset) {
     return NULL;
@@ -28,6 +29,4 @@ void UAsyncManager::AsyncLoadAssets(const TArray<FSoftObjectPath>& Items, EAsync
 void UAsyncManager::AsyncLoadAsset(const FSoftObjectPath& Item, EAsyncPersistence persistence, const FAsyncLoadCompleteDelegate& OnLoadComplete, EAsyncLoadPriority Priority) {
 }
 
-UAsyncManager::UAsyncManager() {
-}
 

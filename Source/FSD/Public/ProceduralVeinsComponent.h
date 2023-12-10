@@ -17,21 +17,22 @@ protected:
     TArray<FVeinResource> VeinResources;
     
 public:
-    UProceduralVeinsComponent();
+    UProceduralVeinsComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
-    static void GenerateResourceVeins_Async(AProceduralSetup*& setup, FLatentActionInfo LatentInfo);
+    static void GenerateResourceVeins_Async(AProceduralSetup*& Setup, FLatentActionInfo LatentInfo);
     
     UFUNCTION(BlueprintCallable)
     void GenerateResourceVeins();
     
     UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
-    static void GenerateMissingResourceVeins_Async(AProceduralSetup*& setup, FLatentActionInfo LatentInfo);
+    static void GenerateMissingResourceVeins_Async(AProceduralSetup*& Setup, FLatentActionInfo LatentInfo);
     
     UFUNCTION(BlueprintCallable)
     void GenerateMissingResourceVeins();
     
     UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
-    static void GenerateDebrisVeins_Async(AProceduralSetup*& setup, EDebrisCarvedType CarverType, FLatentActionInfo LatentInfo);
+    static void GenerateDebrisVeins_Async(AProceduralSetup*& Setup, EDebrisCarvedType CarverType, FLatentActionInfo LatentInfo);
     
     UFUNCTION(BlueprintCallable)
     void GenerateDebrisVeins(EDebrisCarvedType CarverType);

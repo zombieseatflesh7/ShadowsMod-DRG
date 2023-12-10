@@ -2,6 +2,7 @@
 #include "CoreMinimal.h"
 #include "HackingUsableState.h"
 #include "InstantUsable.h"
+#include "ItemDelegateDelegate.h"
 #include "HackingUsableComponent.generated.h"
 
 class AHackingToolItem;
@@ -17,6 +18,9 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FHackedDelegate OnHacked;
     
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FItemDelegate BeingHackedUpdated;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AHackingToolItem> ItemType;
@@ -28,9 +32,10 @@ protected:
     FHackingUsableState HackingState;
     
 public:
-    UHackingUsableComponent();
+    UHackingUsableComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_HackingState(const FHackingUsableState& oldState);

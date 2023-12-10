@@ -29,7 +29,7 @@ public:
     UWeakpointGlowComponent* HitGlow;
     
 protected:
-    UPROPERTY(EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UEnemyHealthComponent> ParentHealth;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -42,7 +42,8 @@ protected:
     USoundCue* deathSound;
     
 public:
-    AGuntowerWeakPoint();
+    AGuntowerWeakPoint(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnExposedChanged(bool isExposed);

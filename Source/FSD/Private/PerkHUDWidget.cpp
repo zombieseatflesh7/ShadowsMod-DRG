@@ -1,8 +1,8 @@
 #include "PerkHUDWidget.h"
 
-class AFSDPlayerState;
-class APlayerCharacter;
-class UPerkAsset;
+UPerkHUDWidget::UPerkHUDWidget() : UUserWidget(FObjectInitializer::Get()) {
+    this->PerkAsset = NULL;
+}
 
 void UPerkHUDWidget::SetPerkAsset(UPerkAsset* InPerk) {
 }
@@ -16,7 +16,4 @@ APlayerCharacter* UPerkHUDWidget::GetCharacter() const {
     return NULL;
 }
 
-UPerkHUDWidget::UPerkHUDWidget() : UUserWidget(FObjectInitializer::Get()) {
-    this->PerkAsset = NULL;
-}
 

@@ -19,11 +19,15 @@ protected:
     
 public:
     UMissionGenerationManager();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UGeneratedMission*> GetMissions(int32 Seed);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UGeneratedMission* GetMissionFromSeeds(int32 GlobalSeed, int32 MissionSeed);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    TArray<UGeneratedMission*> GetAvailableMissionsWithSeasonContentCheck(bool HasOptedOutOfSeasonContent);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UGeneratedMission*> GetAvailableMissions();

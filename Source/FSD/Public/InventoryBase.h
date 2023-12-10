@@ -18,15 +18,16 @@ private:
     TArray<AActor*> ActorsNonSelectable;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_EquippedActor, meta=(AllowPrivateAccess=true))
-    FEquippedActorData EquippedActor;
+    FEquippedActorData ReplicatedEquippedActor;
     
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     AActor* LastEquippedActors[2];
     
 public:
-    UInventoryBase();
+    UInventoryBase(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetEquippedActor(const FEquippedActorData& Actor, bool CallClientDelayed);

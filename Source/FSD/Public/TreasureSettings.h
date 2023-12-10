@@ -3,6 +3,7 @@
 #include "Engine/DataAsset.h"
 #include "Curves/CurveFloat.h"
 #include "ETreasureType.h"
+#include "SpecialChanceEventItem.h"
 #include "TreasureSettings.generated.h"
 
 class UDrinkableDataAsset;
@@ -41,6 +42,9 @@ protected:
     TArray<USpecialEvent*> TreasureEvents;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FSpecialChanceEventItem> SpecialChancedEvent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UVictoryPose*> VictoryPoses;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -51,5 +55,6 @@ protected:
     
 public:
     UTreasureSettings();
+
 };
 

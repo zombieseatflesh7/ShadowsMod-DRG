@@ -1,16 +1,15 @@
 #include "UpgradableGearComponent.h"
 #include "Templates/SubclassOf.h"
 
-class AActor;
-class AFSDPlayerController;
-class AFSDPlayerState;
-class APlayerCharacter;
-class UItemID;
-class UItemUpgrade;
-class UObject;
-class UPlayerCharacterID;
-class UResourceData;
-class UTexture2D;
+UUpgradableGearComponent::UUpgradableGearComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ItemData = NULL;
+    this->OverclockBank = NULL;
+    this->IconLine = NULL;
+    this->IconBG = NULL;
+    this->IconDetailed = NULL;
+    this->CreditCost = 0;
+    this->RequiredCharacterLevel = 0;
+}
 
 void UUpgradableGearComponent::SetGearStatText(FGearStatEntry& Entry, FText Text) {
 }
@@ -34,11 +33,11 @@ bool UUpgradableGearComponent::IsUpgradeEquipped(TSubclassOf<AActor> itemClass, 
     return false;
 }
 
-bool UUpgradableGearComponent::IsTierUnLocked(TSubclassOf<AActor> itemClass, int32 tierIndex, AFSDPlayerState* Player, UPlayerCharacterID* characterID) {
+bool UUpgradableGearComponent::IsTierUnLocked(UObject* WorldContextObject, TSubclassOf<AActor> itemClass, int32 tierIndex, UPlayerCharacterID* characterID) {
     return false;
 }
 
-bool UUpgradableGearComponent::IsOverclockingEnabled(UObject* WorldContextObject, AFSDPlayerState* Player, UPlayerCharacterID* characterID, TSubclassOf<AActor> itemClass) {
+bool UUpgradableGearComponent::IsOverclockingEnabled(UObject* WorldContextObject, UPlayerCharacterID* characterID, TSubclassOf<AActor> itemClass) {
     return false;
 }
 
@@ -102,7 +101,7 @@ EItemUpgradeStatus UUpgradableGearComponent::GetItemUpgradeStatus(UObject* World
     return EItemUpgradeStatus::Locked;
 }
 
-TArray<UItemUpgrade*> UUpgradableGearComponent::GetItemUpgrades(TSubclassOf<AActor> itemClass, TSubclassOf<UItemUpgrade> upgradeClass, AFSDPlayerState* Player, uint8 upgradeIndex) {
+TArray<UItemUpgrade*> UUpgradableGearComponent::GetItemUpgradesFromSave(TSubclassOf<AActor> itemClass, TSubclassOf<UItemUpgrade> upgradeClass, AFSDPlayerState* Player, uint8 upgradeIndex) {
     return TArray<UItemUpgrade*>();
 }
 
@@ -204,13 +203,4 @@ bool UUpgradableGearComponent::CanAffordItem(UObject* WorldContextObject, UItemI
     return false;
 }
 
-UUpgradableGearComponent::UUpgradableGearComponent() {
-    this->ItemData = NULL;
-    this->OverclockBank = NULL;
-    this->IconLine = NULL;
-    this->IconBG = NULL;
-    this->IconDetailed = NULL;
-    this->CreditCost = 0;
-    this->RequiredCharacterLevel = 0;
-}
 

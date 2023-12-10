@@ -11,6 +11,7 @@
 
 class AFSDPlayerState;
 class APlayerCharacter;
+class UCharacterVanityComponent;
 class UIconGenerationCameraKey;
 class UItemAquisitionBase;
 class UObject;
@@ -32,9 +33,6 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString NotesInternal;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool IsPartOfRandomization;
-    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UItemAquisitionBase* Aquisition;
     
@@ -49,6 +47,7 @@ protected:
     
 public:
     UVanityItem();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     bool RemoveFromOwned(UObject* WorldContext);
     
@@ -103,6 +102,11 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure=false, meta=(WorldContext="WorldContextObject"))
     void CraftItem(UObject* WorldContextObject, UPlayerCharacterID* characterID) const;
     
+protected:
+    UFUNCTION(BlueprintCallable)
+    void ChangeToItem(UCharacterVanityComponent* Gear) const;
+    
+public:
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     bool CanCraftWithFashionite(UObject* WorldContextObject) const;
     
@@ -115,7 +119,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     void ApplyItem(APlayerCharacter* Player, bool isPermanent) const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

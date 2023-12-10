@@ -1,12 +1,9 @@
 #include "DSTelemetryWrapper.h"
 #include "Templates/SubclassOf.h"
 
-class AActor;
-class AFSDPlayerController;
-class APlayerCharacter;
-class APlayerController;
-class UGeneratedMission;
-class USeasonChallenge;
+UDSTelemetryWrapper::UDSTelemetryWrapper() {
+    this->Telemetry = NULL;
+}
 
 void UDSTelemetryWrapper::RecordTreeOfVanityClaim(int32 NodeID) {
 }
@@ -68,7 +65,4 @@ void UDSTelemetryWrapper::OnCharacterSaveChanged(TSubclassOf<APlayerCharacter> C
 void UDSTelemetryWrapper::OnCharacterPromoted(TSubclassOf<APlayerCharacter> CharacterClass, int32 RetirementCount) {
 }
 
-UDSTelemetryWrapper::UDSTelemetryWrapper() {
-    this->Telemetry = NULL;
-}
 

@@ -130,9 +130,10 @@ protected:
     ARecallableSentryGunItem* RecallableSentryGunItem;
     
 public:
-    UInventoryComponent();
+    UInventoryComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void UpdateFromSaveGameInSlot(EItemCategory Category);
     
@@ -178,6 +179,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     ARecallableSentryGunItem* GetRecallableSentryGunItem() const;
+    
+    UFUNCTION(BlueprintCallable)
+    AItem* GetOrCreateUnlistedItem(TSubclassOf<AItem> ItemType);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     AItem* GetItem(EItemCategory Category) const;

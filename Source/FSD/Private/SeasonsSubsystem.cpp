@@ -1,20 +1,16 @@
 #include "SeasonsSubsystem.h"
 
-class AFSDPlayerController;
-class AFSDPlayerState;
-class UDataAsset;
-class UItemSkin;
-class UMissionStat;
-class UObject;
-class UPickaxePart;
-class UPlayerCharacterID;
-class USeasonChallenge;
-class USeasonEventData;
-class UTextureRenderTarget2D;
-class UVanityItem;
+USeasonsSubsystem::USeasonsSubsystem() {
+}
 
 FTimespan USeasonsSubsystem::TimeToNewChallenge() {
     return FTimespan{};
+}
+
+void USeasonsSubsystem::SetSeasonCompletedAnnounced(bool IsAnnounced) const {
+}
+
+void USeasonsSubsystem::SetHasOptedOutOfSeasonContent(bool hasOptedOut) {
 }
 
 void USeasonsSubsystem::RerollChallenge(int32 Index) {
@@ -44,11 +40,15 @@ bool USeasonsSubsystem::HasUnclaimedRewards(int32& Level) {
     return false;
 }
 
+bool USeasonsSubsystem::HasOptedOutOfSeasonContent() const {
+    return false;
+}
+
 bool USeasonsSubsystem::HasClaimedLevelRewards(int32 startLevel, int32 numberOfLevels) {
     return false;
 }
 
-bool USeasonsSubsystem::HasClaimedAllRewards() {
+bool USeasonsSubsystem::HasClaimedAllRewards() const {
     return false;
 }
 
@@ -83,6 +83,10 @@ void USeasonsSubsystem::GetSeasonLevel(int32& Level, float& currentLevelPercent,
 }
 
 bool USeasonsSubsystem::GetSeasonExpiryDate(FDateTime& ExpiryDate) {
+    return false;
+}
+
+bool USeasonsSubsystem::GetSeasonCompletedAnnounced() const {
     return false;
 }
 
@@ -170,10 +174,12 @@ bool USeasonsSubsystem::CanRerollChallenge() {
     return false;
 }
 
+bool USeasonsSubsystem::CanOptOutOfSeasonContent() const {
+    return false;
+}
+
 bool USeasonsSubsystem::BuyTreeNode(UObject* WorldContextObject, AFSDPlayerController* Player, int32 TreeOfVanityNodeID) {
     return false;
 }
 
-USeasonsSubsystem::USeasonsSubsystem() {
-}
 

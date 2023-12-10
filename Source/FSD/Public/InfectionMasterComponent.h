@@ -63,9 +63,10 @@ private:
     uint32 RandomSeed;
     
 public:
-    UInfectionMasterComponent();
+    UInfectionMasterComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnRep_RandomSeed();
@@ -73,6 +74,10 @@ private:
 protected:
     UFUNCTION(BlueprintCallable)
     void OnDeath(UHealthComponentBase* enemy);
+    
+private:
+    UFUNCTION(BlueprintCallable)
+    void InfectionPointDestroyed(FName Name);
     
 public:
     UFUNCTION(BlueprintCallable)

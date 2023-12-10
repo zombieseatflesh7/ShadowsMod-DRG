@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "AnimatedItem.h"
+#include "ECharacterCameraMode.h"
 #include "DrinkableItem.generated.h"
 
 class UDrinkableDataAsset;
@@ -14,12 +15,16 @@ protected:
     UDrinkableDataAsset* DrinkableData;
     
 public:
-    ADrinkableItem();
+    ADrinkableItem(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_DrinkableData();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnCameraModeChanged(ECharacterCameraMode NewCameraMode, ECharacterCameraMode OldCameraMode);
     
     UFUNCTION(BlueprintCallable)
     void Consume();

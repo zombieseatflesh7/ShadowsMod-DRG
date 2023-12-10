@@ -64,9 +64,6 @@ protected:
     UDebrisPositioning* Positioning;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    int32 PlacementCategories;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCaveInfluencer* CaveInfluencer;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -125,6 +122,7 @@ protected:
     
 public:
     UEnemyDescriptor();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TSubclassOf<APawn> GetEnemyClass(UBiome* Biome, bool IsElite) const;
     

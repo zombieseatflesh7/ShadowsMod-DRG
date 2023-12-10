@@ -36,7 +36,8 @@ protected:
     bool bCheatObjectivesCompleted;
     
 public:
-    UObjectivesManager();
+    UObjectivesManager(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnObjectiveChanged(UObjective* obj);
@@ -44,6 +45,9 @@ protected:
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool HasRequiredSecondaryObjective() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    TArray<UObjective*> GetSecondaryObjectives() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UObjective* GetSecondaryObjective() const;

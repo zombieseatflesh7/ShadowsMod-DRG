@@ -1,10 +1,13 @@
 #include "ItemSkin.h"
 
-class AFSDPlayerState;
-class UItemID;
-class UMaterialInstanceDynamic;
-class UObject;
-class UPlayerCharacterID;
+UItemSkin::UItemSkin() {
+    this->Aquisition = NULL;
+    this->SkinSet = NULL;
+    this->DynamicIcon = NULL;
+    this->SkinEffect = NULL;
+    this->OwningItem = NULL;
+    this->OwningCharacter = NULL;
+}
 
 bool UItemSkin::Unlock(UObject* WorldContext, UItemID* ItemID, bool broadcast) {
     return false;
@@ -48,12 +51,4 @@ UMaterialInstanceDynamic* UItemSkin::CreateIcon(UObject* Owner) const {
     return NULL;
 }
 
-UItemSkin::UItemSkin() {
-    this->Aquisition = NULL;
-    this->SkinSet = NULL;
-    this->DynamicIcon = NULL;
-    this->SkinEffect = NULL;
-    this->OwningItem = NULL;
-    this->OwningCharacter = NULL;
-}
 

@@ -1,12 +1,8 @@
 #include "ProceduralFunctionLibrary.h"
 #include "Templates/SubclassOf.h"
 
-class AProceduralSetup;
-class UBiome;
-class UDebrisPositioning;
-class UFXSystemAsset;
-class UObject;
-class UObjective;
+UProceduralFunctionLibrary::UProceduralFunctionLibrary() {
+}
 
 void UProceduralFunctionLibrary::SpawnTerrainImpact(UObject* WorldContextObject, UFXSystemAsset* particle, const FVector& Location, FRotator Rotation) {
 }
@@ -34,6 +30,4 @@ bool UProceduralFunctionLibrary::AllControllersFinishedTransitionToPlay(UObject*
     return false;
 }
 
-UProceduralFunctionLibrary::UProceduralFunctionLibrary() {
-}
 

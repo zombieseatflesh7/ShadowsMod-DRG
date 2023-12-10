@@ -41,7 +41,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UOutlineComponent* outline;
     
-    UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_SentryGunOwner, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_SentryGunOwner, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> SentryGunOwner;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -72,14 +72,21 @@ protected:
     float EMPDiscargeCooldown;
     
 public:
-    ARedeployableSentryGun();
+    ARedeployableSentryGun(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void ToggleOutlineAndIcon(bool Visible);
     
     UFUNCTION(BlueprintCallable)
     void SetSentryGunOwner(APlayerCharacter* Character);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void SetEMPIndicatorActive(bool Active);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void SetArcIndicatorActive(bool Active);
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
